@@ -1,102 +1,175 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import companies from "../data/companies.json";
-import faqs from "../data/faq.json";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Link } from "react-router-dom";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Briefcase, BookOpen, Users, Globe, FileText, Search, DollarSign } from "lucide-react";
+import { useUser } from "@clerk/clerk-react";
+import { useState } from "react";
+
+const sections = [
+  {
+    title: "Career Planning",
+    description: "Self-assessments, career paths, and goal-setting tools.",
+    link: "/self-assessment",
+    icon: <Briefcase size={20} />,
+  },
+  {
+    title: "Skill Development",
+    description: "Technical & soft skill training, hands-on learning.",
+    link: "/skills",
+    icon: <BookOpen size={20} />,
+  },
+  {
+    title: "Resume & Cover Letter Resources",
+    description: "Templates, writing tips, examples, and follow-up scripts.",
+    link: "/resume-tools",
+    icon: <FileText size={20} />,
+  },
+  {
+    title: "Job Search Tools",
+    description: "Job boards, tracking, decoding job descriptions, and practice.",
+    link: "/job-tools",
+    icon: <Search size={20} />,
+  },
+  {
+    title: "Networking & Mentorship",
+    description: "Outreach tips, mentor guides, and alumni connections.",
+    link: "/networking",
+    icon: <Users size={20} />,
+  },
+  {
+    title: "Salary & Career Onboarding",
+    description: "Salary research, negotiation, workplace tips, and 90-day prep.",
+    link: "/career-onboarding",
+    icon: <DollarSign size={20} />,
+  },
+  {
+    title: "International Student Support",
+    description: "Visa info, OPT/CPT support, and cultural transition guidance.",
+    link: "/international-support",
+    icon: <Globe size={20} />,
+  },
+];
+
+const faqs = [
+  {
+    question: "How do I know what career path suits me?",
+    answer: "Explore our self-assessment tools and career path explorer to better understand your strengths and interests."
+  },
+  {
+    question: "Where can I find job listings and apply?",
+    answer: "Use the Job Search Tools section for job boards, tracking systems, and application practice tips."
+  },
+  {
+    question: "What kind of resume support is available?",
+    answer: "Our Resume & Cover Letter Resources section includes templates, writing tips, and follow-up scripts."
+  },
+  {
+    question: "Can this platform help with networking?",
+    answer: "Yes! Learn how to connect with mentors, alumni, and professionals using our Networking & Mentorship section."
+  },
+  {
+    question: "I’m an international student—what help is available?",
+    answer: "Visit our International Student Support section for visa guidance, OPT/CPT information, and cultural transition resources."
+  }
+];
 
 const LandingPage = () => {
+  const { isSignedIn } = useUser();
+  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
+
+  const handleProtectedClick = (title) => {
+    if (isSignedIn) {
+      navigate(title);
+    } else {
+      setPopupMessage("Please sign in to access " + title + ".");
+      setShowPopup(true);
+    }
+  };
+
   return (
-    <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20">
-      <section className="text-center ">
-        <h1 className="flex flex-col items-center justify-center gradient-title font-extrabold text-4xl sm:text-6xl lg:text-8xl tracking-tighter py-4">
-          Find Your Dream Job
-          <span className="flex items-center gap-2 sm:gap-6">
-            and get
-            <img
-              src="/logo.png"
-              className="h-14 sm:h-24 lg:h-32"
-              alt="Hirrd Logo"
-            />
-          </span>
-        </h1>
-        <p className="text-gray-300 sm:mt-4 text-xs sm:text-xl">
-          Explore thousands of job listings or find the perfect candidate
-        </p>
-      </section>
-      <div className="flex gap-6 justify-center">
-        <Link to={"/jobs"}>
-          <Button variant="blue" size="xl">
-            Find Jobs
-          </Button>
-        </Link>
-        <Link to={"/post-job"}>
-          <Button variant="destructive" size="xl">
-            Post a Job
-          </Button>
-        </Link>
-      </div>
-      <Carousel
-        plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
-        ]}
-        className="w-full py-10"
+    <main className="flex flex-col gap-10 sm:gap-20 py-10 sm:py-20 px-4">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center"
       >
-        <CarouselContent className="flex gap-5 sm:gap-20 items-center">
-          {companies.map(({ name, id, path }) => (
-            <CarouselItem key={id} className="basis-1/3 lg:basis-1/6 ">
-              <img
-                src={path}
-                alt={name}
-                className="h-9 sm:h-14 object-contain"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
+        <h1 className="gradient-title font-extrabold text-4xl sm:text-6xl tracking-tight mb-4">
+          Your Career Companion at IU
+        </h1>
+        <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
+          Explore tailored resources to plan your career, build your resume, connect with mentors, and land your dream job.
+        </p>
+        <div className="flex justify-center gap-4 mt-6 flex-wrap">
+          <Link to="/self-assessment">
+          <Button variant="blue">Start with Career Planning</Button>
+          </Link>
+          <Link to="/resume-tools">
+            <Button variant="secondary">Build Your Resume</Button>
+          </Link>
+        </div>
+      </motion.section>
 
-      <img src="/banner.jpeg" className="w-full" />
-
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-bold">For Job Seekers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            Search and apply for jobs, track applications, and more.
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="font-bold">For Employers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            Post jobs, manage applications, and find the best candidates.
-          </CardContent>
-        </Card>
-      </section>
-
-      <Accordion type="multiple" className="w-full">
-        {faqs.map((faq, index) => (
-          <AccordionItem key={index} value={`item-${index + 1}`}>
-            <AccordionTrigger>{faq.question}</AccordionTrigger>
-            <AccordionContent>{faq.answer}</AccordionContent>
-          </AccordionItem>
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        {sections.map((section, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+          >
+            <Card
+              className="hover:shadow-2xl hover:scale-[1.02] transition-transform cursor-pointer"
+              onClick={() => handleProtectedClick(section.link)}
+            >
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-blue-200 flex items-center gap-2">
+                  {section.icon}
+                  {section.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-gray-300 text-sm">
+                {section.description}
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </Accordion>
+      </motion.section>
+
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-2xl font-semibold mb-4 text-center">FAQs</h2>
+        <Accordion type="multiple">
+          {faqs.map((faq, index) => (
+            <AccordionItem key={index} value={`item-${index + 1}`}>
+              <AccordionTrigger>{faq.question}</AccordionTrigger>
+              <AccordionContent>{faq.answer}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </motion.section>
+
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white text-black rounded-xl shadow-xl p-6 max-w-md text-center">
+            <p className="mb-4">{popupMessage}</p>
+            <Button onClick={() => navigate("/sign-in")} className="mb-2">Sign In</Button>
+            <Button variant="ghost" onClick={() => setShowPopup(false)}>Cancel</Button>
+          </div>
+        </div>
+      )}
     </main>
   );
 };

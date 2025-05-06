@@ -11,6 +11,7 @@ import JobListing from "./pages/jobListing";
 import MyJobs from "./pages/my-jobs";
 import SavedJobs from "./pages/saved-jobs";
 import JobPage from "./pages/job";
+import SignInPage from "./pages/SignInPage"; // 🆕 custom sign-in page
 
 import "./App.css";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
+      },
+      {
+        path: "/sign-in", // 🆕 custom login page route
+        element: <SignInPage />,
       },
       {
         path: "/onboarding",
