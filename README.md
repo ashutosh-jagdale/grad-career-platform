@@ -1,11 +1,39 @@
-# Full Stack Job Portal with React JS, Tailwind CSS, Supabase, Clerk, Shadcn UI Tutorial 🔥🔥
-## https://www.youtube.com/watch?v=2XF-HgauItk
-![hirrd 1](https://github.com/user-attachments/assets/1da23b25-1f29-4402-be74-03685d9b732d)
+# 🎓 Grad Career Platform
 
-### Make sure to create a `.env` file with following variables -
+A modern, full-stack career services platform built for students and graduates to plan, prepare, and launch their careers. Includes authentication, job tools, resume resources, and onboarding workflows — all deployed on Vercel.
 
-```
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
-VITE_CLERK_PUBLISHABLE_KEY=
-```
+## 🌐 Live Demo
+
+🔗 [grad-career-platform.vercel.app](https://grad-career-platform.vercel.app)
+
+
+---
+
+## 🚀 Features
+
+- 🔐 **Authentication** with Clerk (sign in, sign up, protected routes)
+- ⚙️ **Role-based routing** (onboarding, job seeker tools, etc.)
+- 📄 Resume and cover letter templates & examples
+- 🎯 Career planning tools, self-assessment links
+- 💬 Networking and mentorship guides
+- 🌍 International student support (OPT/CPT help)
+- 📦 Fully deployed via Vercel (CI/CD from GitHub)
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React + Vite
+- **Routing:** React Router v6
+- **Authentication:** Clerk
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Animation:** Framer Motion
+- **Deployment:** Vercel
+
+---
+
+## 🔧 Setup Instructions
+
+```bash
+git clone https://github.com/ashutosh-jagdale/grad-career-platform.git
+cd grad-career-platform
