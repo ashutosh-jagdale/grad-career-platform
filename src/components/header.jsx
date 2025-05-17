@@ -8,7 +8,7 @@ const Header = () => {
       <Link to="/" className="text-xl font-bold text-white">
         Grad Career Platform
       </Link>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         <SignedOut>
           <SignInButton mode="modal">
             <Button variant="outline">Login</Button>

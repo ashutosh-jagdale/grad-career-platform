@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ClerkProvider } from "@clerk/clerk-react";
+import Dashboard from "./pages/dashboard"; // ✅ adjust if located elsewhere
 
 import AppLayout from "./layouts/app-layout";
 import ProtectedRoute from "./components/protected-route";
@@ -11,7 +13,13 @@ import JobListing from "./pages/jobListing";
 import MyJobs from "./pages/my-jobs";
 import SavedJobs from "./pages/saved-jobs";
 import JobPage from "./pages/job";
-import SignInPage from "./pages/SignInPage"; // 🆕 custom sign-in page
+import SelfAssessment from "./pages/self-assessment";
+import Skills from "./pages/skills";
+import ResumeTools from "./pages/resume-tools";
+import JobTools from "./pages/job-tools";
+import Networking from "./pages/networking";
+import CareerOnboarding from "./pages/career-onboarding";
+import InternationalSupport from "./pages/international-support";
 
 import "./App.css";
 
@@ -22,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LandingPage />,
-      },
-      {
-        path: "/sign-in", // 🆕 custom login page route
-        element: <SignInPage />,
       },
       {
         path: "/onboarding",
@@ -43,6 +47,14 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/dashboard",
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+      },      
       {
         path: "/post-job",
         element: (
@@ -67,6 +79,62 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/self-assessment",
+        element: (
+          <ProtectedRoute>
+            <SelfAssessment />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/skills",
+        element: (
+          <ProtectedRoute>
+            <Skills />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/job-tools",
+        element: (
+          <ProtectedRoute>
+            <JobTools />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/networking",
+        element: (
+          <ProtectedRoute>
+            <Networking />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/career-onboarding",
+        element: (
+          <ProtectedRoute>
+            <CareerOnboarding />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/international-support",
+        element: (
+          <ProtectedRoute>
+            <InternationalSupport />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/resume-tools",
+        element: (
+          <ProtectedRoute>
+            <ResumeTools />
+          </ProtectedRoute>
+        ),
+      },      
       {
         path: "/job/:id",
         element: (

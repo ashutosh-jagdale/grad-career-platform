@@ -1,10 +1,28 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Briefcase, BookOpen, Users, Globe, FileText, Search, DollarSign } from "lucide-react";
-import { useUser } from "@clerk/clerk-react";
+import {
+  Briefcase,
+  BookOpen,
+  Users,
+  Globe,
+  FileText,
+  Search,
+  DollarSign,
+} from "lucide-react";
+import { useUser, SignInButton } from "@clerk/clerk-react";
 import { useState } from "react";
 
 const sections = [
@@ -55,28 +73,33 @@ const sections = [
 const faqs = [
   {
     question: "How do I know what career path suits me?",
-    answer: "Explore our self-assessment tools and career path explorer to better understand your strengths and interests."
+    answer:
+      "Explore our self-assessment tools and career path explorer to better understand your strengths and interests.",
   },
   {
     question: "Where can I find job listings and apply?",
-    answer: "Use the Job Search Tools section for job boards, tracking systems, and application practice tips."
+    answer:
+      "Use the Job Search Tools section for job boards, tracking systems, and application practice tips.",
   },
   {
     question: "What kind of resume support is available?",
-    answer: "Our Resume & Cover Letter Resources section includes templates, writing tips, and follow-up scripts."
+    answer:
+      "Our Resume & Cover Letter Resources section includes templates, writing tips, and follow-up scripts.",
   },
   {
     question: "Can this platform help with networking?",
-    answer: "Yes! Learn how to connect with mentors, alumni, and professionals using our Networking & Mentorship section."
+    answer:
+      "Yes! Learn how to connect with mentors, alumni, and professionals using our Networking & Mentorship section.",
   },
   {
     question: "I’m an international student—what help is available?",
-    answer: "Visit our International Student Support section for visa guidance, OPT/CPT information, and cultural transition resources."
-  }
+    answer:
+      "Visit our International Student Support section for visa guidance, OPT/CPT information, and cultural transition resources.",
+  },
 ];
 
 const LandingPage = () => {
-  const { isSignedIn } = useUser();
+  const { user, isSignedIn, isLoaded } = useUser();  // ✅ add isLoaded
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
@@ -85,7 +108,11 @@ const LandingPage = () => {
     if (isSignedIn) {
       navigate(title);
     } else {
-      setPopupMessage("Please sign in to access " + title + ".");
+      const cleaned = title
+        .replace("/", "")
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+      setPopupMessage(`Please Login or Sign Up to access ${cleaned}`);
       setShowPopup(true);
     }
   };
@@ -98,20 +125,18 @@ const LandingPage = () => {
         transition={{ duration: 0.6 }}
         className="text-center"
       >
+        {isSignedIn && (
+          <h2 className="text-white text-xl mb-2">
+            Welcome{user?.firstName ? `, ${user.firstName}` : ""}!
+          </h2>
+        )}
         <h1 className="gradient-title font-extrabold text-4xl sm:text-6xl tracking-tight mb-4">
           Your Career Companion at IU
         </h1>
         <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
-          Explore tailored resources to plan your career, build your resume, connect with mentors, and land your dream job.
+          Explore tailored resources to plan your career, build your resume,
+          connect with mentors, and land your dream job.
         </p>
-        <div className="flex justify-center gap-4 mt-6 flex-wrap">
-          <Link to="/self-assessment">
-          <Button variant="blue">Start with Career Planning</Button>
-          </Link>
-          <Link to="/resume-tools">
-            <Button variant="secondary">Build Your Resume</Button>
-          </Link>
-        </div>
       </motion.section>
 
       <motion.section
@@ -145,28 +170,34 @@ const LandingPage = () => {
         ))}
       </motion.section>
 
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 className="text-2xl font-semibold mb-4 text-center">FAQs</h2>
-        <Accordion type="multiple">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index + 1}`}>
-              <AccordionTrigger>{faq.question}</AccordionTrigger>
-              <AccordionContent>{faq.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </motion.section>
+      {!isSignedIn && (
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-2xl font-semibold mb-4 text-center">FAQs</h2>
+          <Accordion type="multiple">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index + 1}`}>
+                <AccordionTrigger>{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </motion.section>
+      )}
 
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white text-black rounded-xl shadow-xl p-6 max-w-md text-center">
             <p className="mb-4">{popupMessage}</p>
-            <Button onClick={() => navigate("/sign-in")} className="mb-2">Sign In</Button>
-            <Button variant="ghost" onClick={() => setShowPopup(false)}>Cancel</Button>
+            <SignInButton mode="modal">
+              <Button className="mb-2">Sign In</Button>
+            </SignInButton>
+            <Button variant="ghost" onClick={() => setShowPopup(false)}>
+              Cancel
+            </Button>
           </div>
         </div>
       )}
