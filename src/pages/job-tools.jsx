@@ -1,36 +1,73 @@
-// job-tools.jsx
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Briefcase, FileText, Search, ClipboardList, Brain } from "lucide-react";
 
 export default function JobTools() {
   return (
     <div className="space-y-6 p-6 text-white">
       <h1 className="text-3xl font-bold mb-6">Job Search Tools</h1>
 
-      <Card>
-        <CardHeader><CardTitle>Job Board Aggregator</CardTitle></CardHeader>
+      <Card className="bg-gray-800 text-white">
+        <CardHeader className="flex gap-2 items-center">
+          <Search size={20} />
+          <CardTitle>Job Board Aggregator</CardTitle>
+        </CardHeader>
         <CardContent>
-          <p>One-click access to curated job boards for tech, consulting, research, and government jobs.</p>
+          <p>Browse job boards tailored to your industry:</p>
+          <ul className="list-disc ml-6 mt-2 text-sm text-gray-300">
+            <li><a href="https://www.indeed.com/" target="_blank" className="text-blue-400 underline">Indeed</a> – General jobs</li>
+            <li><a href="https://www.linkedin.com/jobs/" target="_blank" className="text-blue-400 underline">LinkedIn</a> – Tech, Business</li>
+            <li><a href="https://usajobs.gov/" target="_blank" className="text-blue-400 underline">USAJobs</a> – Government roles</li>
+            <li><a href="https://researchgate.net/jobs" target="_blank" className="text-blue-400 underline">ResearchGate</a> – Research/PhD roles</li>
+          </ul>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader><CardTitle>Application Tracker</CardTitle></CardHeader>
+      <Card className="bg-gray-800 text-white">
+        <CardHeader className="flex gap-2 items-center">
+          <ClipboardList size={20} />
+          <CardTitle>Application Tracker</CardTitle>
+        </CardHeader>
         <CardContent>
-          <p>Track applications, statuses, deadlines, and interviews visually. Integrates with Notion or Airtable templates.</p>
+          <p>Track your job applications with ease.</p>
+          <p className="text-sm mt-2">Download templates:</p>
+          <ul className="list-disc ml-6 text-sm text-blue-400">
+            <li><a href="/trackers/notion-job-tracker-template.html" download>Notion Tracker Template</a></li>
+            <li><a href="/trackers/airtable-job-tracker.csv" download>Airtable CSV</a></li>
+          </ul>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader><CardTitle>Job Description Decoder</CardTitle></CardHeader>
+      <Card className="bg-gray-800 text-white">
+        <CardHeader className="flex gap-2 items-center">
+          <FileText size={20} />
+          <CardTitle>Job Description Decoder</CardTitle>
+        </CardHeader>
         <CardContent>
-          <p>Paste a job description and get a summary of key skills and keywords to tailor your resume.</p>
+          <p>Paste a job description below to extract skills and keywords.</p>
+          <textarea
+            placeholder="Paste job description here..."
+            className="w-full mt-2 p-2 rounded-md bg-gray-900 text-white border border-gray-700"
+            rows={5}
+          />
+          <button className="mt-3 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 text-white text-sm">
+            Analyze Description
+          </button>
+          <p className="mt-2 text-xs text-gray-400">*Feature demo only — AI parsing in progress.</p>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader><CardTitle>Practice Hub</CardTitle></CardHeader>
+      <Card className="bg-gray-800 text-white">
+        <CardHeader className="flex gap-2 items-center">
+          <Brain size={20} />
+          <CardTitle>Practice Hub</CardTitle>
+        </CardHeader>
         <CardContent>
-          <p>Links to mock interview tools, STAR response templates, and behavioral question banks.</p>
+          <p>Prepare for interviews with curated resources:</p>
+          <ul className="list-disc ml-6 text-sm text-gray-300 mt-2">
+            <li><a href="https://interviewing.io/" className="text-blue-400 underline">Mock Interview Platforms</a></li>
+            <li><a href="/resources/STAR-worksheet.pdf" download>STAR Technique Worksheet</a></li>
+            <li><a href="/resources/behavioral-question-bank.pdf" download>Behavioral Question Bank</a></li>
+          </ul>
         </CardContent>
       </Card>
     </div>

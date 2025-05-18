@@ -190,7 +190,7 @@ const LandingPage = () => {
 
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white text-black rounded-xl shadow-xl p-6 max-w-md text-center">
+<div className="bg-[#1c1f2b] text-white rounded-xl shadow-xl p-6 max-w-md text-center border border-gray-700">
             <p className="mb-4">{popupMessage}</p>
             <SignInButton mode="modal">
               <Button className="mb-2">Sign In</Button>
