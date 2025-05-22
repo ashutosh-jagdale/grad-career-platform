@@ -2,11 +2,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MessageCircle, Brain, Users } from "lucide-react";
 
 const softSkills = [
   {
     title: "Communication Skills",
+    icon: <MessageCircle size={20} />, 
     description: "Express ideas clearly in writing, speaking, and visual formats.",
     tips: [
       "Join public speaking or debate clubs.",
@@ -16,6 +18,7 @@ const softSkills = [
   },
   {
     title: "Critical Thinking",
+    icon: <Brain size={20} />, 
     description: "Evaluate problems logically and offer solutions.",
     tips: [
       "Use tools like SWOT or 5 Whys analysis.",
@@ -25,6 +28,7 @@ const softSkills = [
   },
   {
     title: "Collaboration & Teamwork",
+    icon: <Users size={20} />, 
     description: "Work productively across teams.",
     tips: [
       "Take on team roles like mediator or facilitator.",
@@ -53,7 +57,24 @@ const technicalSkills = [
 ];
 
 export default function Skills() {
-  const [progress, setProgress] = useState(40);
+  const [completedSkills, setCompletedSkills] = useState(() => {
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem("completedSkills")) || [];
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("completedSkills", JSON.stringify(completedSkills));
+  }, [completedSkills]);
+
+  const toggleComplete = (title) => {
+    setCompletedSkills((prev) =>
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title]
+    );
+  };
+
+  const progress = Math.round((completedSkills.length / softSkills.length) * 100);
 
   return (
     <div className="p-6 text-white">
@@ -70,21 +91,29 @@ export default function Skills() {
         </TabsList>
 
         <TabsContent value="soft">
-          {softSkills.map((skill, index) => (
-            <Card key={index} className="mb-4 bg-gray-800 text-white">
-              <CardHeader>
-                <CardTitle>{skill.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="mb-2 text-gray-300">{skill.description}</p>
-                <ul className="list-disc ml-5 text-sm text-gray-400">
-                  {skill.tips.map((tip, i) => (
-                    <li key={i}>{tip}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
+          <div className="grid gap-6">
+            {softSkills.map((skill, index) => (
+              <Card key={index} className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+                <div className="flex items-center gap-2 mb-2">
+                  {skill.icon}
+                  <CardTitle className="text-xl font-semibold flex-grow">{skill.title}</CardTitle>
+                  <input
+                    type="checkbox"
+                    checked={completedSkills.includes(skill.title)}
+                    onChange={() => toggleComplete(skill.title)}
+                    className="form-checkbox h-5 w-5 text-blue-500"
+                    title="Mark as complete"
+                  />
+                </div>
+                <CardContent className="pl-0 pt-0">
+                  <p className="text-gray-300 mb-2">{skill.description}</p>
+                  <ul className="list-disc pl-6 text-sm text-gray-400 space-y-1">
+                    {skill.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </TabsContent>
 
         <TabsContent value="technical">
