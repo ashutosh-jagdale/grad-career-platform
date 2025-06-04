@@ -1,8 +1,45 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
-const CareerPlanning = () => {
+const paths = [
+  {
+    title: "🧪 Research Scientist",
+    detail: "Explore PhD tracks, research fellowships, biotech roles, and science policy careers.",
+    links: [
+      { name: "NIH Career Center", url: "https://www.training.nih.gov/" },
+      { name: "Science Careers", url: "https://www.science.org/careers" },
+    ],
+  },
+  {
+    title: "💻 Data Analyst",
+    detail: "Entry into tech, finance, or healthcare via analytics, dashboards, and SQL-driven insights.",
+    links: [
+      { name: "Kaggle Jobs", url: "https://www.kaggle.com/jobs" },
+      { name: "Mode Analytics Blog", url: "https://mode.com/sql/" },
+    ],
+  },
+  {
+    title: "🎓 Lecturer / EdTech",
+    detail: "Teaching roles in universities, curriculum design, or educational technology startups.",
+    links: [
+      { name: "HigherEdJobs", url: "https://www.higheredjobs.com/" },
+      { name: "EdSurge Jobs", url: "https://www.edsurge.com/jobs" },
+    ],
+  },
+  {
+    title: "🧑‍💼 Product Manager",
+    detail: "Own strategy in tech/startups — ideal for those with business + technical fluency.",
+    links: [
+      { name: "PM Interview Prep", url: "https://www.productalliance.com/" },
+      { name: "PM Jobs", url: "https://wellfound.com" },
+    ],
+  },
+];
+
+export default function CareerPlanning() {
+  const [expanded, setExpanded] = useState(null);
+
   return (
     <div className="p-6 text-white max-w-4xl mx-auto space-y-8">
       <h1 className="text-3xl font-bold text-center mb-4">Career Planning Resources</h1>
@@ -13,11 +50,11 @@ const CareerPlanning = () => {
           <CardTitle>🧠 Self-Assessment Tools</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Understand your strengths, preferences, and values to guide your career direction.</p>
-          <ul className="list-disc pl-5 mt-3 space-y-2 text-sm text-gray-300">
-            <li><a href="https://www.16personalities.com/" target="_blank" rel="noopener noreferrer">MBTI (16Personalities)</a></li>
-            <li><a href="https://openpsychometrics.org/tests/Holland/" target="_blank" rel="noopener noreferrer">Holland Code Quiz</a></li>
-            <li><a href="https://www.viacharacter.org/" target="_blank" rel="noopener noreferrer">VIA Strengths Survey</a></li>
+          <p className="mb-2">Discover your strengths, values, and personality:</p>
+          <ul className="list-disc pl-5 space-y-2 text-sm text-blue-400">
+            <li><a href="https://www.16personalities.com/" target="_blank" rel="noopener noreferrer">MBTI (16Personalities)</a> — Understand personality type</li>
+            <li><a href="https://openpsychometrics.org/tests/Holland/" target="_blank" rel="noopener noreferrer">Holland Code Quiz</a> — Interests & work preferences</li>
+            <li><a href="https://www.viacharacter.org/" target="_blank" rel="noopener noreferrer">VIA Strengths Survey</a> — Personal strengths discovery</li>
           </ul>
         </CardContent>
       </Card>
@@ -28,12 +65,31 @@ const CareerPlanning = () => {
           <CardTitle>📊 Career Path Explorer</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Browse popular career options for graduate students in your field:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 text-sm">
-            <div className="bg-gray-800 p-4 rounded">🧪 Research Scientist → PhD programs, biotech, policy</div>
-            <div className="bg-gray-800 p-4 rounded">💻 Data Analyst → Tech, finance, healthcare</div>
-            <div className="bg-gray-800 p-4 rounded">🎓 Lecturer → Academic roles, EdTech</div>
-            <div className="bg-gray-800 p-4 rounded">🧑‍💼 Product Manager → Tech startups, consulting</div>
+          <p className="mb-4">Browse career options and dive into curated links for each:</p>
+          <div className="space-y-4">
+            {paths.map((path, idx) => (
+              <div
+                key={idx}
+                className="bg-gray-800 p-4 rounded hover:ring hover:ring-blue-400 cursor-pointer"
+                onClick={() => setExpanded(expanded === idx ? null : idx)}
+              >
+                <h3 className="font-semibold">{path.title}</h3>
+                {expanded === idx && (
+                  <div className="mt-2 text-sm text-gray-300 space-y-1">
+                    <p>{path.detail}</p>
+                    <ul className="list-disc pl-5 text-blue-400 mt-2">
+                      {path.links.map((link, i) => (
+                        <li key={i}>
+                          <a href={link.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
+                            {link.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
@@ -44,7 +100,12 @@ const CareerPlanning = () => {
           <CardTitle>🎯 Goal-Setting Framework</CardTitle>
         </CardHeader>
         <CardContent>
-          <p>Use our worksheet to map short- and long-term career goals.</p>
+          <p>Use our worksheet to map your career goals:</p>
+          <ul className="list-disc pl-5 mt-2 text-sm text-gray-400">
+            <li>Short-term: internships, certifications</li>
+            <li>Mid-term: role types, industries</li>
+            <li>Long-term: leadership, research, or independence</li>
+          </ul>
           <Button asChild className="mt-3">
             <a href="/downloads/career-goal-worksheet.pdf" download>
               Download Goal Worksheet
@@ -53,25 +114,24 @@ const CareerPlanning = () => {
         </CardContent>
       </Card>
 
-      {/* Optional: Career Advice Video */}
+      {/* Career Advice Video (replace broken link) */}
       <Card>
         <CardHeader>
           <CardTitle>🎥 Watch: Planning Your Career in Grad School</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="aspect-video">
-            <iframe
-              className="w-full h-full rounded"
-              src="https://www.youtube.com/embed/Eg5-FFTPjZ4"
-              title="Career Planning Tips"
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </CardContent>
+  <div className="aspect-video">
+    <iframe
+      className="w-full h-full rounded"
+      src="https://www.youtube.com/embed/BVH2XuDcIeY"
+      title="Career Planning for Grad Students"
+      frameBorder="0"
+      allowFullScreen
+    ></iframe>
+  </div>
+</CardContent>
+
       </Card>
     </div>
   );
-};
-
-export default CareerPlanning;
+}
