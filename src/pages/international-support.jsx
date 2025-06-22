@@ -1,42 +1,62 @@
-import { Globe, Users, Landmark, Gavel, BookOpen, ExternalLink } from "lucide-react";
+import { Globe, Users, Gavel, BookOpen, ExternalLink } from "lucide-react";
 
 const supportItems = [
   {
     title: "OPT/CPT & Visa Info",
     icon: <Globe size={20} className="text-blue-400" />,
-    description: "Timelines, renewals, FAQs, and key links to navigate F-1 visa rules, CPT, and OPT applications.",
+    description: "Timelines, renewals, and official guidance for F‑1 visa, CPT, and OPT.",
     links: [
-      { name: "Study in the States", url: "https://studyinthestates.dhs.gov/" },
-      { name: "IU OPT/CPT Portal", url: "https://ois.indiana.edu/employment/f-1/index.html" },
-      { name: "USCIS Case Status", url: "https://egov.uscis.gov/casestatus" },
+      { name: "USCIS Form I‑765 (OPT Filing)", url: "https://www.uscis.gov/i-765" },
+      { name: "Study in the States (DHS)", url: "https://studyinthestates.dhs.gov/" },
+      { name: "NAFSA Immigration Basics", url: "https://www.nafsa.org/immigration" },
     ],
   },
   {
     title: "Alumni Experiences",
     icon: <Users size={20} className="text-green-400" />,
-    description: "Real journeys of international grads—how they landed jobs, navigated immigration, and succeeded in U.S. work culture.",
+    description:
+      "Real stories from international grads about job hunting, visas, and U.S. life.",
     links: [
-      { name: "Download Stories (PDF)", url: "/resources/alumni-stories.pdf" },
-      { name: "LinkedIn Voices", url: "https://www.linkedin.com/search/results/content/?keywords=international%20student%20journey" },
+      { name: "NAFSA Stories", url: "https://www.nafsa.org/nafsa-stories" },
+      { name: "Pro Bono Net (legal aid)", url: "https://www.probono.net/" },
     ],
   },
   {
     title: "Cultural Adjustment Resources",
     icon: <BookOpen size={20} className="text-yellow-400" />,
-    description: "Guides to help you adapt to life and communication norms in the U.S., from small talk to classroom dynamics.",
+    description:
+      "Guides on U.S. culture, norms, and life abroad for international students.",
     links: [
-      { name: "Cultural Guide (PDF)", url: "/resources/cultural-guide.pdf" },
-      { name: "Intro to U.S. Culture", url: "https://www.internationalstudent.com/study_usa/way-of-life/american-culture/" },
+      {
+        name: "Guide to American Culture (Penn State)",
+        url:
+          "https://harrisburg.psu.edu/international-students-office/guide-american-culture-etiquette",
+      },
+      {
+        name: "Six Aspects of U.S. Culture",
+        url:
+          "https://www.studyusa.com/en/a/1223/six-aspects-of-u-s-culture-international-students-need-to-know",
+      },
     ],
   },
   {
     title: "Campus & Legal Support",
     icon: <Gavel size={20} className="text-red-400" />,
-    description: "Access legal clinics, tax software, ISS advising, and emergency help — all tailored for international students.",
+    description:
+      "Access to free legal aid, disability resources, and tax assistance.",
     links: [
-      { name: "IU OIS Portal", url: "https://ois.indiana.edu/" },
-      { name: "Sprintax (Tax Filing)", url: "https://www.sprintax.com/" },
-      { name: "Student Legal Services", url: "https://studentaffairs.indiana.edu/student-support/student-legal-services/" },
+      {
+        name: "Indiana Legal Services (free civil aid)",
+        url: "https://www.indianalegalservices.org/",
+      },
+      {
+        name: "USA.gov: Find Legal Aid",
+        url: "https://www.usa.gov/legal-aid",
+      },
+      {
+        name: "DO‑IT Center (Disability Support)",
+        url: "https://www.washington.edu/doit/",
+      },
     ],
   },
 ];
@@ -46,12 +66,16 @@ export default function InternationalSupport() {
     <div className="p-6 text-white max-w-6xl mx-auto space-y-10">
       <h1 className="text-3xl font-bold mb-2">🌍 International Student Support</h1>
       <p className="text-gray-400 max-w-2xl">
-        Tools and guidance to help you succeed as an international student — academically, professionally, and legally.
+        Public and broadly accessible resources to guide international students through
+        academic, cultural, legal, and tax-related needs.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {supportItems.map((item, idx) => (
-          <div key={idx} className="bg-gray-800 rounded-xl p-5 shadow-md border border-gray-700 hover:ring-2 hover:ring-blue-500 transition-all">
+          <div
+            key={idx}
+            className="bg-gray-800 rounded-xl p-5 shadow-md border border-gray-700 hover:ring-2 hover:ring-blue-500 transition-all"
+          >
             <div className="flex items-center gap-3 mb-2">
               {item.icon}
               <h2 className="text-lg font-semibold">{item.title}</h2>
@@ -76,12 +100,14 @@ export default function InternationalSupport() {
         ))}
       </div>
 
-      {/* Optional Success Story or Quote */}
       <div className="bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-inner">
         <blockquote className="italic text-gray-300 text-sm max-w-3xl mx-auto text-center">
-          “OIS helped me understand my OPT deadlines and even reviewed my documents before submission. I wouldn’t have done it without their support.”
+          “Indiana Legal Services and Pro Bono Net were lifesavers when navigating civil
+          and immigration-related legal questions.”
         </blockquote>
-        <p className="text-xs text-gray-500 mt-2 text-right pr-4">— Master's Student, IU Kelley School of Business</p>
+        <p className="text-xs text-gray-500 mt-2 text-right pr-4">
+          — International Graduate Testimonial
+        </p>
       </div>
     </div>
   );
