@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
-import { MessageCircle, Brain, Users } from "lucide-react";
+import { MessageCircle, Brain, Users, Clock, BarChart, Activity } from "lucide-react";
 
 const softSkills = [
   {
@@ -35,6 +35,36 @@ const softSkills = [
       "Practice active listening.",
     ],
   },
+  {
+    title: "Time Management",
+    icon: <Clock size={20} />,
+    description: "Organize and prioritize tasks to meet deadlines effectively.",
+    tips: [
+      "Use planners or digital tools like Trello/Notion.",
+      "Break large tasks into smaller ones.",
+      "Avoid multitasking and set realistic goals.",
+    ],
+  },
+  {
+    title: "Adaptability & Resilience",
+    icon: <Activity size={20} />,
+    description: "Adjust to new challenges and learn from setbacks.",
+    tips: [
+      "Reflect on past challenges and how you overcame them.",
+      "Take initiative in unfamiliar situations.",
+      "Maintain a positive mindset during change.",
+    ],
+  },
+  {
+    title: "Leadership",
+    icon: <Users size={20} />,
+    description: "Motivate and guide teams toward shared goals.",
+    tips: [
+      "Lead group projects or student organizations.",
+      "Develop emotional intelligence and empathy.",
+      "Encourage feedback and continuous improvement.",
+    ],
+  },
 ];
 
 const technicalSkills = [
@@ -52,6 +82,38 @@ const technicalSkills = [
     links: [
       { name: "SQL Tutorial", url: "https://mode.com/sql-tutorial/" },
       { name: "LeetCode SQL", url: "https://leetcode.com/problemset/database/" },
+    ],
+  },
+  {
+    title: "Excel for Analytics",
+    description: "Pivot tables, formulas, charts, and business modeling.",
+    links: [
+      { name: "Excel Skills for Business", url: "https://www.coursera.org/specializations/excel" },
+      { name: "Microsoft Excel Tutorials", url: "https://support.microsoft.com/en-us/excel" },
+    ],
+  },
+  {
+    title: "Power BI / Tableau",
+    description: "Build dashboards and visual insights using data storytelling tools.",
+    links: [
+      { name: "Power BI Learning", url: "https://learn.microsoft.com/en-us/training/powerplatform/power-bi/" },
+      { name: "Tableau Training", url: "https://www.tableau.com/learn/training" },
+    ],
+  },
+  {
+    title: "Business Analysis",
+    description: "Stakeholder analysis, requirement gathering, and process mapping.",
+    links: [
+      { name: "BA Foundations (LinkedIn)", url: "https://www.linkedin.com/learning/paths/become-a-business-analyst" },
+      { name: "BABOK Guide", url: "https://www.iiba.org/standards-and-resources/babok/" },
+    ],
+  },
+  {
+    title: "Statistics & Data Literacy",
+    description: "Distributions, hypothesis testing, and interpreting results.",
+    links: [
+      { name: "Khan Academy Statistics", url: "https://www.khanacademy.org/math/statistics-probability" },
+      { name: "Intro to Stats (Udacity)", url: "https://www.udacity.com/course/intro-to-statistics--st101" },
     ],
   },
   {
@@ -90,7 +152,7 @@ export default function Skills() {
       <h1 className="text-3xl font-bold mb-6">Skill Development</h1>
       <p className="mb-4 text-gray-300 max-w-3xl">
         Strengthen both technical and soft skills to stand out in your job search.
-        These skills help you thrive in complex work environments, communicate effectively, and work on real-world problems.
+        These skills help you thrive in work environments, collaborate cross-functionally, and tackle real-world problems.
       </p>
 
       <Tabs defaultValue="soft" className="w-full">
@@ -118,7 +180,7 @@ export default function Skills() {
                 <CardContent className="pl-0 pt-0">
                   <p className="text-gray-300 mb-2">{skill.description}</p>
                   <ul className="list-disc pl-6 text-sm text-gray-400 space-y-1">
-                    {skill.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+                    {skill.tips?.map((tip, i) => <li key={i}>{tip}</li>)}
                   </ul>
                 </CardContent>
               </Card>
@@ -144,7 +206,7 @@ export default function Skills() {
                 <CardContent className="pl-0 pt-0">
                   <p className="text-gray-300 mb-2">{skill.description}</p>
                   <ul className="list-disc pl-6 text-sm text-blue-400 space-y-1">
-                    {skill.links.map((link, i) => (
+                    {skill.links?.map((link, i) => (
                       <li key={i}>
                         <a href={link.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
                           {link.name}

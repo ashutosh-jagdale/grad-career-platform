@@ -15,8 +15,8 @@ const paths = [
     title: "💻 Data Analyst",
     detail: "Entry into tech, finance, or healthcare via analytics, dashboards, and SQL-driven insights.",
     links: [
-      { name: "Kaggle Jobs", url: "https://www.kaggle.com/jobs" },
-      { name: "Mode Analytics Blog", url: "https://mode.com/sql/" },
+      { name: "AI Jobs Board", url: "https://ai-jobs.net/" },
+      { name: "SQLBolt – Learn SQL", url: "https://sqlbolt.com/" },
     ],
   },
   {
@@ -53,7 +53,7 @@ export default function CareerPlanning() {
           <p className="mb-2">Discover your strengths, values, and personality:</p>
           <ul className="list-disc pl-5 space-y-2 text-sm text-blue-400">
             <li><a href="https://www.16personalities.com/" target="_blank" rel="noopener noreferrer">MBTI (16Personalities)</a> — Understand personality type</li>
-            <li><a href="https://openpsychometrics.org/tests/Holland/" target="_blank" rel="noopener noreferrer">Holland Code Quiz</a> — Interests & work preferences</li>
+            <li><a href="https://www.truity.com/test/holland-code-career-test" target="_blank" rel="noopener noreferrer">Holland Code Quiz</a> — Interests & work preferences</li>
             <li><a href="https://www.viacharacter.org/" target="_blank" rel="noopener noreferrer">VIA Strengths Survey</a> — Personal strengths discovery</li>
           </ul>
         </CardContent>
@@ -107,9 +107,13 @@ export default function CareerPlanning() {
             <li>Long-term: leadership, research, or independence</li>
           </ul>
           <Button asChild className="mt-3">
-            <a href="/downloads/career-goal-worksheet.pdf" download>
-              Download Goal Worksheet
-            </a>
+            <a
+  href="https://docs.google.com/spreadsheets/d/1bcdw5xLZJt1OHOVZSeI26AxDKCXVePeO/edit?usp=sharing&ouid=113645497946083537524&rtpof=true&sd=true"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Download Goal Worksheet
+</a>
           </Button>
         </CardContent>
       </Card>
@@ -120,17 +124,16 @@ export default function CareerPlanning() {
           <CardTitle>🎥 Watch: Planning Your Career in Grad School</CardTitle>
         </CardHeader>
         <CardContent>
-  <div className="aspect-video">
-    <iframe
-      className="w-full h-full rounded"
-      src="https://www.youtube.com/embed/BVH2XuDcIeY"
-      title="Career Planning for Grad Students"
-      frameBorder="0"
-      allowFullScreen
-    ></iframe>
-  </div>
-</CardContent>
-
+          <div className="aspect-video">
+            <iframe
+              className="w-full h-full rounded"
+              src="https://www.youtube.com/embed/BVH2XuDcIeY"
+              title="Career Planning for Grad Students"
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </CardContent>
       </Card>
     </div>
   );
