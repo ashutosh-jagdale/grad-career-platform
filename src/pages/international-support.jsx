@@ -14,39 +14,34 @@ const supportItems = [
   {
     title: "Alumni Experiences",
     icon: <Users size={20} className="text-green-400" />,
-    description:
-      "Real stories from international grads about job hunting, visas, and U.S. life.",
+    description: "Real stories from international grads about job hunting, visas, and U.S. life.",
     links: [
       { name: "NAFSA Stories", url: "https://www.nafsa.org/nafsa-stories" },
-      { name: "Pro Bono Net (legal aid)", url: "https://www.probono.net/" },
+      { name: "Pro Bono Net (Legal Aid)", url: "https://www.probono.net/" },
     ],
   },
   {
     title: "Cultural Adjustment Resources",
     icon: <BookOpen size={20} className="text-yellow-400" />,
-    description:
-      "Guides on U.S. culture, norms, and life abroad for international students.",
+    description: "Guides on U.S. culture, norms, and life abroad for international students.",
     links: [
       {
         name: "Guide to American Culture (Penn State)",
-        url:
-          "https://harrisburg.psu.edu/international-students-office/guide-american-culture-etiquette",
+        url: "https://harrisburg.psu.edu/international-students-office/guide-american-culture-etiquette",
       },
       {
         name: "Six Aspects of U.S. Culture",
-        url:
-          "https://www.studyusa.com/en/a/1223/six-aspects-of-u-s-culture-international-students-need-to-know",
+        url: "https://www.studyusa.com/en/a/1223/six-aspects-of-u-s-culture-international-students-need-to-know",
       },
     ],
   },
   {
     title: "Campus & Legal Support",
     icon: <Gavel size={20} className="text-red-400" />,
-    description:
-      "Access to free legal aid, disability resources, and tax assistance.",
+    description: "Access to free legal aid, disability resources, and tax assistance.",
     links: [
       {
-        name: "Indiana Legal Services (free civil aid)",
+        name: "Indiana Legal Services (Free Civil Aid)",
         url: "https://www.indianalegalservices.org/",
       },
       {
@@ -66,15 +61,15 @@ export default function InternationalSupport() {
     <div className="p-6 text-white max-w-6xl mx-auto space-y-10">
       <h1 className="text-3xl font-bold mb-2">🌍 International Student Support</h1>
       <p className="text-gray-400 max-w-2xl">
-        Public and broadly accessible resources to guide international students through
-        academic, cultural, legal, and tax-related needs.
+        Resources to help international students with visas, cultural adaptation,
+        legal aid, and academic transitions.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {supportItems.map((item, idx) => (
           <div
             key={idx}
-            className="bg-gray-800 rounded-xl p-5 shadow-md border border-gray-700 hover:ring-2 hover:ring-blue-500 transition-all"
+            className="bg-gray-800 rounded-xl p-5 border border-gray-700 shadow-md hover:ring-2 hover:ring-blue-500 transition-all"
           >
             <div className="flex items-center gap-3 mb-2">
               {item.icon}
@@ -102,10 +97,9 @@ export default function InternationalSupport() {
 
       <div className="bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-inner">
         <blockquote className="italic text-gray-300 text-sm max-w-3xl mx-auto text-center">
-          “Indiana Legal Services and Pro Bono Net were lifesavers when navigating civil
-          and immigration-related legal questions.”
+          “Indiana Legal Services and Pro Bono Net were lifesavers when navigating civil and immigration-related legal questions.”
         </blockquote>
-        <p className="text-xs text-gray-500 mt-2 text-right pr-4">
+        <p className="text-xs text-right text-gray-500 mt-2 pr-4">
           — International Graduate Testimonial
         </p>
       </div>

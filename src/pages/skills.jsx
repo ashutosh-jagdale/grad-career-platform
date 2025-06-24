@@ -14,6 +14,7 @@ const softSkills = [
       "Practice writing emails or summaries.",
       "Seek feedback on communication style.",
     ],
+    level: "Intermediate",
   },
   {
     title: "Critical Thinking",
@@ -24,6 +25,7 @@ const softSkills = [
       "Debrief past decisions regularly.",
       "Read case studies and solve them.",
     ],
+    level: "Advanced",
   },
   {
     title: "Collaboration & Teamwork",
@@ -34,6 +36,7 @@ const softSkills = [
       "Ask for feedback on group contributions.",
       "Practice active listening.",
     ],
+    level: "Intermediate",
   },
   {
     title: "Time Management",
@@ -44,6 +47,7 @@ const softSkills = [
       "Break large tasks into smaller ones.",
       "Avoid multitasking and set realistic goals.",
     ],
+    level: "Beginner",
   },
   {
     title: "Adaptability & Resilience",
@@ -54,6 +58,7 @@ const softSkills = [
       "Take initiative in unfamiliar situations.",
       "Maintain a positive mindset during change.",
     ],
+    level: "Advanced",
   },
   {
     title: "Leadership",
@@ -64,6 +69,7 @@ const softSkills = [
       "Develop emotional intelligence and empathy.",
       "Encourage feedback and continuous improvement.",
     ],
+    level: "Intermediate",
   },
 ];
 
@@ -75,6 +81,7 @@ const technicalSkills = [
       { name: "LearnPython.org", url: "https://www.learnpython.org/" },
       { name: "Python Docs", url: "https://docs.python.org/3/tutorial/" },
     ],
+    level: "Beginner",
   },
   {
     title: "SQL for Data",
@@ -83,6 +90,7 @@ const technicalSkills = [
       { name: "SQL Tutorial", url: "https://mode.com/sql-tutorial/" },
       { name: "LeetCode SQL", url: "https://leetcode.com/problemset/database/" },
     ],
+    level: "Intermediate",
   },
   {
     title: "Excel for Analytics",
@@ -91,6 +99,7 @@ const technicalSkills = [
       { name: "Excel Skills for Business", url: "https://www.coursera.org/specializations/excel" },
       { name: "Microsoft Excel Tutorials", url: "https://support.microsoft.com/en-us/excel" },
     ],
+    level: "Beginner",
   },
   {
     title: "Power BI / Tableau",
@@ -99,6 +108,7 @@ const technicalSkills = [
       { name: "Power BI Learning", url: "https://learn.microsoft.com/en-us/training/powerplatform/power-bi/" },
       { name: "Tableau Training", url: "https://www.tableau.com/learn/training" },
     ],
+    level: "Intermediate",
   },
   {
     title: "Business Analysis",
@@ -107,6 +117,7 @@ const technicalSkills = [
       { name: "BA Foundations (LinkedIn)", url: "https://www.linkedin.com/learning/paths/become-a-business-analyst" },
       { name: "BABOK Guide", url: "https://www.iiba.org/standards-and-resources/babok/" },
     ],
+    level: "Advanced",
   },
   {
     title: "Statistics & Data Literacy",
@@ -115,6 +126,7 @@ const technicalSkills = [
       { name: "Khan Academy Statistics", url: "https://www.khanacademy.org/math/statistics-probability" },
       { name: "Intro to Stats (Udacity)", url: "https://www.udacity.com/course/intro-to-statistics--st101" },
     ],
+    level: "Intermediate",
   },
   {
     title: "Version Control (Git)",
@@ -123,6 +135,7 @@ const technicalSkills = [
       { name: "Learn Git Branching", url: "https://learngitbranching.js.org/" },
       { name: "GitHub Docs", url: "https://docs.github.com/en/get-started" },
     ],
+    level: "Beginner",
   },
 ];
 
@@ -147,6 +160,51 @@ export default function Skills() {
   const totalSkills = softSkills.length + technicalSkills.length;
   const progress = Math.round((completedSkills.length / totalSkills) * 100);
 
+  const renderSkills = (skills, isTechnical = false) => (
+    <div className="grid gap-6">
+      {skills.map((skill, index) => (
+        <Card key={index} className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
+          <div className="flex items-center gap-2 mb-2">
+            {skill.icon && skill.icon}
+            <CardTitle className="text-xl font-semibold flex-grow">{skill.title}</CardTitle>
+            <span className="text-xs bg-blue-700 px-2 py-1 rounded-full text-white">{skill.level}</span>
+            {completedSkills.includes(skill.title) && (
+              <span className="text-xs bg-green-600 text-white px-2 py-0.5 rounded-full ml-2">✓ Completed</span>
+            )}
+            <input
+              type="checkbox"
+              checked={completedSkills.includes(skill.title)}
+              onChange={() => toggleComplete(skill.title)}
+              className="form-checkbox h-5 w-5 text-blue-500 ml-2"
+              title="Mark as complete"
+            />
+          </div>
+          <CardContent className="pl-0 pt-0">
+            <p className="text-gray-300 mb-2">{skill.description}</p>
+            {isTechnical ? (
+              <ul className="list-disc pl-6 text-sm text-blue-400 space-y-1">
+                {skill.links.map((link, i) => (
+                  <li key={i}>
+                    <a href={link.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <details className="mt-2 bg-gray-700 rounded-md p-3 text-sm text-gray-300">
+                <summary className="cursor-pointer font-semibold text-blue-400">See how to develop this skill</summary>
+                <ul className="list-disc pl-5 mt-2 space-y-1 text-gray-400">
+                  {skill.tips.map((tip, i) => <li key={i}>{tip}</li>)}
+                </ul>
+              </details>
+            )}
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+
   return (
     <div className="p-6 text-white">
       <h1 className="text-3xl font-bold mb-6">Skill Development</h1>
@@ -161,64 +219,8 @@ export default function Skills() {
           <TabsTrigger value="technical">Technical Skills</TabsTrigger>
         </TabsList>
 
-        {/* Soft Skills */}
-        <TabsContent value="soft">
-          <div className="grid gap-6">
-            {softSkills.map((skill, index) => (
-              <Card key={index} className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <div className="flex items-center gap-2 mb-2">
-                  {skill.icon}
-                  <CardTitle className="text-xl font-semibold flex-grow">{skill.title}</CardTitle>
-                  <input
-                    type="checkbox"
-                    checked={completedSkills.includes(skill.title)}
-                    onChange={() => toggleComplete(skill.title)}
-                    className="form-checkbox h-5 w-5 text-blue-500"
-                    title="Mark as complete"
-                  />
-                </div>
-                <CardContent className="pl-0 pt-0">
-                  <p className="text-gray-300 mb-2">{skill.description}</p>
-                  <ul className="list-disc pl-6 text-sm text-gray-400 space-y-1">
-                    {skill.tips?.map((tip, i) => <li key={i}>{tip}</li>)}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
-
-        {/* Technical Skills */}
-        <TabsContent value="technical">
-          <div className="grid gap-6">
-            {technicalSkills.map((skill, index) => (
-              <Card key={index} className="bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition">
-                <div className="flex items-center gap-2 mb-2">
-                  <CardTitle className="text-xl font-semibold flex-grow">{skill.title}</CardTitle>
-                  <input
-                    type="checkbox"
-                    checked={completedSkills.includes(skill.title)}
-                    onChange={() => toggleComplete(skill.title)}
-                    className="form-checkbox h-5 w-5 text-blue-500"
-                    title="Mark as complete"
-                  />
-                </div>
-                <CardContent className="pl-0 pt-0">
-                  <p className="text-gray-300 mb-2">{skill.description}</p>
-                  <ul className="list-disc pl-6 text-sm text-blue-400 space-y-1">
-                    {skill.links?.map((link, i) => (
-                      <li key={i}>
-                        <a href={link.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-300">
-                          {link.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
+        <TabsContent value="soft">{renderSkills(softSkills)}</TabsContent>
+        <TabsContent value="technical">{renderSkills(technicalSkills, true)}</TabsContent>
       </Tabs>
 
       <div className="mt-10">

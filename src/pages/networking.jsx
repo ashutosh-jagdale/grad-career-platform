@@ -1,4 +1,10 @@
 import { Users, MailCheck, BookOpenCheck, Linkedin, ExternalLink } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const networkingItems = [
   {
@@ -40,7 +46,7 @@ const networkingItems = [
 
 export default function NetworkingMentorship() {
   return (
-    <div className="p-6 text-white max-w-6xl mx-auto space-y-8">
+    <div className="p-6 text-white max-w-6xl mx-auto space-y-10">
       <h1 className="text-3xl font-bold mb-2">🤝 Networking & Mentorship</h1>
       <p className="text-gray-400 max-w-2xl">
         Access templates, mentorship tips, and proven tools to build meaningful professional relationships.
@@ -48,27 +54,39 @@ export default function NetworkingMentorship() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {networkingItems.map((item, idx) => (
-          <div key={idx} className="bg-gray-800 rounded-xl p-5 shadow hover:ring-2 hover:ring-blue-500 transition-all">
+          <div
+            key={idx}
+            className="bg-gray-800 rounded-xl p-5 shadow hover:scale-[1.02] hover:bg-gray-700 transition-all"
+          >
             <div className="flex items-center gap-3 mb-3">
-              <item.icon size={22} />
+              <div className="p-2 rounded-full bg-blue-900">
+                <item.icon size={22} className="text-blue-400" />
+              </div>
               <h2 className="text-lg font-semibold">{item.title}</h2>
             </div>
             <p className="text-sm text-gray-300 mb-3">{item.description}</p>
-            <ul className="space-y-2 text-sm">
-              {item.links.map((link, i) => (
-                <li key={i}>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 underline"
-                  >
-                    {link.name}
-                    <ExternalLink size={14} />
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <Accordion type="single" collapsible className="w-full text-sm">
+              <AccordionItem value={`item-${idx}`}>
+                <AccordionTrigger className="text-blue-400 hover:text-blue-300">Resources</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-2">
+                    {item.links.map((link, i) => (
+                      <li key={i}>
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-blue-300 hover:text-blue-200 underline"
+                        >
+                          {link.name}
+                          <ExternalLink size={14} />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         ))}
       </div>
@@ -78,6 +96,17 @@ export default function NetworkingMentorship() {
           “Reaching out to one alum opened the door to my first internship. The template helped me get the tone just right.”
         </blockquote>
         <p className="text-xs text-right text-gray-500 mt-2 pr-6">— Graduate Student, IU Informatics</p>
+      </div>
+
+      <div className="mt-8 bg-blue-900 border border-blue-700 rounded-lg p-4 text-sm text-white text-center">
+        Looking for personalized mentor matches? {" "}
+        <a
+          href="https://admin.typeform.com/signup?tid=9cd328e2-c3a4-400c-8ae2-a423f9bf71fa"
+          className="underline text-blue-300 hover:text-blue-200"
+          target="_blank"
+        >
+          Submit your request here →
+        </a>
       </div>
     </div>
   );
