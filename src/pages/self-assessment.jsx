@@ -25,6 +25,7 @@ const paths = [
     links: [
       { name: "HigherEdJobs", url: "https://www.higheredjobs.com/" },
       { name: "EdSurge Jobs", url: "https://www.edsurge.com/jobs" },
+      { name: "Chronicle of Higher Ed Jobs", url: "https://jobs.chronicle.com/" },
     ],
   },
   {
@@ -55,6 +56,7 @@ export default function CareerPlanning() {
             <li><a href="https://www.16personalities.com/" target="_blank" rel="noopener noreferrer">MBTI (16Personalities)</a> — Understand personality type</li>
             <li><a href="https://www.truity.com/test/holland-code-career-test" target="_blank" rel="noopener noreferrer">Holland Code Quiz</a> — Interests & work preferences</li>
             <li><a href="https://www.viacharacter.org/" target="_blank" rel="noopener noreferrer">VIA Strengths Survey</a> — Personal strengths discovery</li>
+            <li><a href="https://blueeq.com/" target="_blank" rel="noopener noreferrer">BlueEQ</a> — Build interview stories using emotional intelligence</li>
           </ul>
         </CardContent>
       </Card>
@@ -108,13 +110,28 @@ export default function CareerPlanning() {
           </ul>
           <Button asChild className="mt-3">
             <a
-  href="https://docs.google.com/spreadsheets/d/1bcdw5xLZJt1OHOVZSeI26AxDKCXVePeO/edit?usp=sharing&ouid=113645497946083537524&rtpof=true&sd=true"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Download Goal Worksheet
-</a>
+              href="https://docs.google.com/spreadsheets/d/1bcdw5xLZJt1OHOVZSeI26AxDKCXVePeO/edit?usp=sharing&ouid=113645497946083537524&rtpof=true&sd=true"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download Goal Worksheet
+            </a>
           </Button>
+        </CardContent>
+      </Card>
+
+      {/* LinkedIn Connection Templates */}
+      <Card>
+        <CardHeader>
+          <CardTitle>💬 LinkedIn Messaging Templates</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-2 text-sm text-gray-300">Use these pre-filled messages to connect with alumni or professionals:</p>
+          <ul className="list-disc pl-5 text-sm text-blue-400 space-y-2">
+            <li><span className="text-white">General Alumni:</span> “Hi [Name], I’m a recent Luddy grad exploring [field]. I’d love to connect and hear about your journey.”</li>
+            <li><span className="text-white">Post-Event Follow-up:</span> “It was great meeting you at [event]. Would love to stay in touch and learn more about your work.”</li>
+            <li><span className="text-white">Informational Request:</span> “Hi [Name], I’m curious about your role at [Company]. Would you be open to a quick chat sometime this week?”</li>
+          </ul>
         </CardContent>
       </Card>
 
@@ -133,6 +150,18 @@ export default function CareerPlanning() {
               allowFullScreen
             ></iframe>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Alumni Career Support */}
+      <Card>
+        <CardHeader>
+          <CardTitle>🎓 Alumni Career Services</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-gray-300">
+            Recently graduated? You can continue getting help through the <a href="https://alumni.iu.edu/career-development/index.html" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">IU Alumni Association</a> — offering career coaching, job boards, and events exclusively for alumni.
+          </p>
         </CardContent>
       </Card>
     </div>

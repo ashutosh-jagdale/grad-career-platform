@@ -58,6 +58,7 @@ export default function JobTools() {
             <li><a href="https://usajobs.gov/" target="_blank" className="text-blue-400 underline">USAJobs</a> – Government roles</li>
             <li><a href="https://www.researchgate.net/jobs" target="_blank" className="text-blue-400 underline">ResearchGate</a> – Research/PhD roles</li>
             <li><a href="https://wellfound.com/jobs" target="_blank" className="text-blue-400 underline">Wellfound</a> – Startups & founders</li>
+            <li><a href="https://jobs.chronicle.com/" target="_blank" className="text-blue-400 underline">Chronicle of Higher Ed</a> – Teaching in higher education</li>
           </ul>
         </CardContent>
       </Card>
@@ -142,9 +143,22 @@ export default function JobTools() {
           <p>Curated resources to help you prepare with confidence:</p>
           <ul className="list-disc ml-6 text-sm text-gray-300 mt-2 space-y-1">
             <li><a href="https://interviewing.io/" target="_blank" className="text-blue-400 underline">Mock Interview Platforms (interviewing.io)</a></li>
+            <li><a href="https://www.yoodli.ai/" target="_blank" className="text-blue-400 underline">Yoodli AI Interview Coach</a> – Practice with AI feedback</li>
             <li><a href="https://studentaffairs.vancouver.wsu.edu/files/inserted-files/STAR%20Interviewing%20Practice%20Sheet.pdf" target="_blank" className="text-blue-400 underline">STAR Interview Practice Sheet (WSU Vancouver)</a></li>
             <li><a href="https://www.bcitsa.ca/careerservices/wp-content/uploads/sites/7/2020/03/Behavioral-Interview-Questions-and-Answers-mar9.pdf" target="_blank" className="text-blue-400 underline">Behavioral Interview Q&A (BCITSA PDF)</a></li>
             <li><a href="https://resources.biginterview.com/behavioral-interviews/behavioral-interview-questions/" target="_blank" className="text-blue-400 underline">Behavioral Interview Tips & Sample Answers (Big Interview)</a></li>
+            <li><a href="https://www.caseinterview.com/case-interview-framework" target="_blank" className="text-blue-400 underline">Case Interview Prep Guide (Victor Cheng)</a></li>
+            <li><a href="https://www.preplounge.com/en/management-consulting-cases/" target="_blank" className="text-blue-400 underline">Case Interview Examples (PrepLounge)</a></li>
+            <li>
+  <a
+    href="https://careers.kelley.iu.edu/resources/casequestions-com/"
+    target="_blank"
+    className="text-blue-400 underline"
+  >
+    CaseQuestions.com – Kelley Interview Practice Tool (Free for IU Students)
+  </a>
+</li>
+
           </ul>
         </CardContent>
       </Card>
